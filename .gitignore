@@ -1,0 +1,20 @@
+# CMake build directories and files
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Compiled binary
+/AccountingApp
+
+# Editor and OS-related files
+*.swp
+*.swo
+*.log
+*.user
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
