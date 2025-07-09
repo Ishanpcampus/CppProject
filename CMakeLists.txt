@@ -12,5 +12,9 @@ include_directories(include)
 file(GLOB SOURCES "src/*.cpp")
 
 # Create the executable
-add_executable(AccountingApp ${SOURCES})
+add_executable(AccountingApp ${SOURCES}
+        include/Date.h
+        src/Date.cpp
+        include/TransactionManager.h
+        src/TransactionManager.cpp)
 
