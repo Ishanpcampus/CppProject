@@ -6,9 +6,12 @@
 #include <sstream>
 #include <iostream>
 
+//Adds transactions
 void TransactionManager::addTransaction(const Transaction &t) {
     transactions.push_back(t);
 }
+
+//Loads the transactions details from the file that we have alredy made in the transaction.cpp
 void TransactionManager::loadFromFile(const std::string& filename ) {
     //work for you janak
     /*    std::ifstream file(filename);
@@ -38,12 +41,16 @@ void TransactionManager::loadFromFile(const std::string& filename ) {
 
     file.close();
 }code by chatgpt*/
-std::ifstream file(filename);
+
+std::ifstream file(filename);//opens a file in reading mode and creares an ifstream object
+
+    //checks if file is open or not
     if (!file.is_open()) {
         std::cerr << " Unable to open file: " << filename << "\n";
         return;
     }
 
+    //Extracting data from the file
     std::string line;
     while (std::getline(file, line)) {
         std::stringstream ss(line);
@@ -73,6 +80,8 @@ std::ifstream file(filename);
 
     file.close();
 }
+
+//Calculates balance
 double TransactionManager::calculateBalance(const std::string &account) const {
     double balance = 0.0;
     for (const auto &t : transactions) {
