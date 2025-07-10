@@ -2,6 +2,7 @@
 #include "Date.h"
 #include <iostream>
 #include <sstream>
+#include "Inventory.h"
 Transaction::Transaction() : account(), type(""), description(""), debit(0.0),
 credit(0.0), date() {}
 Transaction::Transaction(const int& acc, const std::string &t,
@@ -32,6 +33,7 @@ void Transaction::input() {
     date.setDate();
 
 }
+
 void Transaction::display() const {
     std::cout<<"Type: "<<type<<std::endl;
     std::cout<<"Description: "<<description<<std::endl;
