@@ -41,5 +41,35 @@ void Transaction::display() const {
 }
 void Transaction::saveToFile(const std::string& filename) const {
 //file kholne ani save garne ani amount save garda type == "credit" ? credit : -debit garne
+/*std::ofstream infile(filename, std::ios::app);
+     if (!infile) {
+        std::cerr << "error opening file for writing\n";
+        return;
+     }
+      double amount = (type == "credit") ? credit : -debit;
+     infile<<"Account no\t\tTypes\t\tdescription\t\tdebit\t\tcredit\t\t amount \t\t date\n";
+     infile<<account<<"\t\t"<<type<<"\t\t"<<description<<"\t\t"<<debit<<"\t\t"<<credit<<"\t\t"<<amount<<"\t\t"<<date;
+   
+
+    infile<<"\n---------------------------------\n";
+    infile.close(); */
+    std::ofstream outfile(filename, std::ios::app);
+    if (!outfile) {
+        std::cerr << "error opening file: " << filename << "\n";
+        return;
+    }
+
+   
+    outfile << account << ","
+            << type << ","
+            << description << ","
+            << debit << ","
+            << credit << ","
+            << date.getDay() << "/" << date.getMonth() << "/" << date.getYear()
+            << "\n";
+
+    outfile.close();
+
+
 }
 
