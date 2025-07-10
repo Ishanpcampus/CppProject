@@ -2,10 +2,7 @@
 #include "Inventory.h"
 #include<fstream>
 
-Inventory::Inventory()
-{
-
-}
+Inventory::Inventory(){}//Nothing just a default constructor
 
 //Adds Items in the inventory
 void Inventory::addItem()
@@ -14,7 +11,9 @@ void Inventory::addItem()
     std::cout<<"Enter the no. of items you want to add: ";
     std::cin>>n;
 
+    //Manipulating vector using a simple loop
     for(int i=0; i<n; i++){
+
         Item I;
         std::cout<<"Enter the name of the "<<i+1<<" th item: "; 
         std::cin>>I.itemName;
@@ -25,7 +24,7 @@ void Inventory::addItem()
         std::cout<<"Enter the price of the item: ";
         std::cin>>I.price;
 
-        items.push_back(I);
+        items.push_back(I);//Think like appending the structure I to the vector items
         
     }
 
@@ -35,6 +34,8 @@ void Inventory::addItem()
 //Updates price if needed
 void Inventory::updatePrice(const std::string nam, const int &p)
 {
+
+//This is called for each loop. Think like all the vector members are loaded to the variable in left
     for(Item &I: items){
         if(nam == I.itemName){
             I.price = p;
@@ -74,7 +75,7 @@ void Inventory::viewInventory() const
 //Writes all items present in the vector to the file
 void Inventory::saveInventoryToFile(const std::string &filename) const
 {
-    std::ofstream outfile("inventory.txt");
+    std::ofstream outfile("inventory.txt", std::ios::app);
 
     for(const Item& I: items){
         outfile<<I.itemName<<std::endl;
@@ -84,6 +85,8 @@ void Inventory::saveInventoryToFile(const std::string &filename) const
 
     return;
 }
+
+//In future I will also add a code here to clear all the inventory
 
 //Reads all items from the inventory and assigns them to the vector
 void Inventory::loadInventoryFromFile()
@@ -99,7 +102,6 @@ void Inventory::loadInventoryFromFile()
     }
 
     return;
-    
 }
 
 //Checks if the item is less than or equal to 15 and displays an alert message if it does
