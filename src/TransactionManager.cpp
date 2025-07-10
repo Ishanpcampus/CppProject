@@ -9,7 +9,7 @@
 void TransactionManager::addTransaction(const Transaction &t) {
     transactions.push_back(t);
 }
-void TransactionManager::loadFromFile(const Transaction &t) {
+void TransactionManager::loadFromFile(const std::string& filename ) {
     //work for you janak
     /*    std::ifstream file(filename);
     if (!file.is_open()) {
