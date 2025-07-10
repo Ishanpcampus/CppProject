@@ -2,8 +2,12 @@
 #include "Date.h"
 #include <iostream>
 #include <sstream>
-Transaction::Transaction() : account(), type(""), description(""), debit(0.0), credit(0.0), date() {}
-Transaction::Transaction(const int& acc, const std::string &t, const Date& d, const std::string &desc, double deb, double cre):account(acc) ,type(t), date(d),description(desc), debit(deb), credit(cre) {}
+Transaction::Transaction() : account(), type(""), description(""), debit(0.0),
+credit(0.0), date() {}
+Transaction::Transaction(const int& acc, const std::string &t,
+    const Date& d, const std::string &desc, double deb,
+    double cre):account(acc) ,type(t), date(d),
+description(desc), debit(deb), credit(cre) {}
 void Transaction::input() {
     std::cout << "Enter account number: ";
     std::cin >> account;

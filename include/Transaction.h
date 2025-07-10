@@ -15,11 +15,13 @@ public:
     Date date;
 
     Transaction();
-    Transaction(const int& account, const std::string& type,
-                const Date& date, const std::string& desc,
-                double debit, double credit);
+
+    Transaction(const int& acc, const std::string &t,
+        const Date& d, const std::string &desc,
+        double deb, double cre);
 
     void input();
+
     void display() const;
     void saveToFile(const std::string& filename) const;
 };
