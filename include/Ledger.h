@@ -3,17 +3,29 @@
 
 #include <vector>
 #include <string>
+#include "Date.h"
+#include "Transaction.h"
+#include "TransactionManager.h"
 
 class LedgerEntry {
 public:
-    std::string username;
-    std::string date;
-    std::string type;
+    int account;
+    std::string nature;
+    std::string itemName;
+    int quantity;
+    double rate;
     double amount;
     std::string description;
+    std::string type; // debit or credit
+    Date date;
 
-    LedgerEntry(const std::string& u, const std::string& d, const std::string& t, double a, const std::string& desc);
-    void display() const;
+
+    LedgerEntry() = default;
+    LedgerEntry(int acc, const std::string& nat, const std::string& item,
+                int qty, double r, const std::string& desc,
+                const std::string& t, const Date& d);
+
+    void displayStyled() const;
 };
 
 class Ledger {
@@ -21,10 +33,9 @@ private:
     std::vector<LedgerEntry> entries;
 
 public:
-    void loadFromFile(const std::string& filename);
+    void loadFromTransactions(const std::vector<Transaction>& txList);
     void addEntry(const LedgerEntry& entry);
-    void saveToFile(const std::string& filename) const;
-    void displayAll() const;
+    void displayStyledLedger(int account) const;;
 };
 
 #endif

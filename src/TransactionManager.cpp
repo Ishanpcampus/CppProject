@@ -74,11 +74,14 @@ std::ifstream file(filename);//opens a file in reading mode and creares an ifstr
         ds >> day >> slash1 >> month >> slash2 >> year;
 
         Date date(year, month, day);
-        Transaction t(acc, type, date, desc, debit, credit);
+        Transaction t(acc, type,  date, desc, debit, credit);
         transactions.push_back(t);
     }
 
     file.close();
+}
+std::vector<Transaction> TransactionManager::getAllTransactions() const {
+    return transactions;
 }
 
 //Calculates balance
@@ -87,6 +90,7 @@ double TransactionManager::calculateBalance(const std::string &account) const {
     for (const auto &t : transactions) {
         balance += t.credit;
         balance -= t.debit;
-        return balance;
+
     }
+    return balance;
 }

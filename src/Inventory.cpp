@@ -3,6 +3,14 @@
 #include<fstream>
 
 Inventory::Inventory(){}//Nothing just a default constructor
+//to get price of item
+double Inventory::getPriceByName(const std::string& itemName) const {
+    for (const Item& I : items) {
+        if (I.itemName == itemName)
+            return I.price;
+    }
+    return -1; // Item not found
+}
 
 //Adds Items in the inventory
 void Inventory::addItem()
@@ -36,7 +44,7 @@ void Inventory::updatePrice(const std::string nam, const int &p)
 {
 
 //This is called for each loop. Think like all the vector members are loaded to the variable in left
-    for(Item &I: items){
+    for( Item &I: items){
         if(nam == I.itemName){
             I.price = p;
         }

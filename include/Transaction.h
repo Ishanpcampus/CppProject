@@ -3,27 +3,29 @@
 
 #include <string>
 #include "Date.h"
-#include <fstream>
+#include "Inventory.h"
 
 class Transaction {
 public:
     int account;
     std::string type;
+    std::string nature;
+    std::string itemName;
     std::string description;
+    double rate;
+    double amount;
+    int quantity;
     double debit;
     double credit;
     Date date;
 
     Transaction();
+    Transaction(int acc, const std::string& nat, const std::string& desc, int qty, double r, const Date& d);
 
-    Transaction(const int& acc, const std::string &t,
-        const Date& d, const std::string &desc,
-        double deb, double cre);
 
-    void input();
-
+    void input(Inventory& inventory); // Accept inventory reference
     void display() const;
     void saveToFile(const std::string& filename) const;
 };
 
-#endif // TRANSACTION_H
+#endif

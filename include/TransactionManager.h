@@ -13,8 +13,8 @@ class TransactionManager {
   std::vector<Transaction> transactions;
   public:
   void addTransaction(const Transaction& transaction);
-  bool removeTransaction(const std::string& filename, const std::string& account, const std::string& description);
   void loadFromFile(const std::string& filename);
+  std::vector<Transaction> getAllTransactions() const;
   double calculateBalance(const std::string& account) const;
 };
 #endif //TRANSACTIONMANAGER_H

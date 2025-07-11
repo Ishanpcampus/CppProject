@@ -1,106 +1,109 @@
 #include "Transaction.h"
-#include "Date.h"
 #include <iostream>
+#include <fstream>
 #include <sstream>
-#include "Inventory.h"
 
-Transaction::Transaction() : account(), type(""), description(""), debit(0.0),
-credit(0.0), date() {}//sets default value
+Transaction::Transaction()
+    : account(0), type(""), nature(""), itemName(""), description(""),
+      rate(0.0), amount(0.0), quantity(0),
+      debit(0.0), credit(0.0), date() {}
 
+Transaction::Transaction(int acc, const std::string& nat, const std::string& desc, int qty, double r, const Date& d)
+    : account(acc), nature(nat), description(desc), quantity(qty), rate(r), date(d) {
+    amount = quantity * rate;
+    if (nature == "sales" || nature == "purchase return") {
+        type = "debit";
+        debit = amount;
+        credit = 0.0;
+    } else {
+        type = "credit";
+        credit = amount;
+        debit = 0.0;
+    }
+}
 
-Transaction::Transaction(const int& acc, const std::string &t,
-    const Date& d, const std::string &desc, double deb,
-    double cre):account(acc) ,type(t), date(d),
-description(desc), debit(deb), credit(cre) {}//sets value entered by the user
-
-//Takes input from the user
-void Transaction::input() {
-
-    //Name
+// Input function now depends on Inventory
+void Transaction::input(Inventory& inventory) {
     std::cout << "Enter account number: ";
     std::cin >> account;
 
-    //Type
-    std::cout<<"Enter type of transaction (credit/debit): ";
-    std::cin >>type;
+    std::cout << "Enter nature of transaction (sales, purchase, sales return, purchase return): ";
+    std::cin >> nature;
 
-    //Checks if the type is invalid
-    if(type!="credit" && type!="debit") {
-        std::cerr<<"Wrong transaction type!\n Enter debit or credit"<<std::endl;
-    }
-    
-    //Description
-    std::cout<<"Enter description: ";
-    std::cin.ignore();//Clears the buffer containing new line character in the buffer due to cin or cerr
-    std::getline(std::cin,description);//To input a whole line from standard input i.e keyboard
-
-    //Amount
-    std::cout<<"Enter amount: ";
-
-    //checks if credit or debit and performs accordingly
-    if(type=="credit") {
-        std::cin>>credit;
-        debit = 0.0;
+    if (nature != "sales" && nature != "purchase" &&
+        nature != "sales return" && nature != "purchase return") {
+        std::cerr << "Invalid transaction nature.\n";
+        return;
     }
 
-    if(type=="debit") {
-        std::cin>>debit;
+    std::cout << "Enter item name: ";
+    std::cin >> itemName;
+
+    rate = inventory.getPriceByName(itemName);
+    if (rate == -1) {
+        std::cerr << "Item not found in inventory.\n";
+        return;
+    }
+
+    std::cout << "Enter quantity: ";
+    std::cin >> quantity;
+
+    std::cin.ignore(); // clear input buffer
+    std::cout << "Enter description: ";
+    std::getline(std::cin, description);
+
+    amount = quantity * rate;
+
+    if (nature == "sales" || nature == "purchase return") {
+        type = "debit";
+        debit = amount;
         credit = 0.0;
+        inventory.updateQuantity(itemName, -quantity); // reduce stock
+    } else {
+        type = "credit";
+        credit = amount;
+        debit = 0.0;
+        inventory.updateQuantity(itemName, quantity); // increase stock
     }
 
-    //Date of transaction
-    std::cout<<"Enter date: ";
+    std::cout << "Enter date of transaction:\n";
     date.setDate();
-
-    return;
 }
 
-//Displays all the details entered by the user
+// Displays transaction details
 void Transaction::display() const {
-    std::cout<<"Type: "<<type<<std::endl;
-    std::cout<<"Description: "<<description<<std::endl;
-    std::cout<<"debit: "<<debit<<std::endl;
-    std::cout<<"Credit: "<<credit<<std::endl;
-    std::cout<<"Date: "<<date<<std::endl;
+    std::cout << "\n--- Transaction Details ---\n";
+    std::cout << "Account No: " << account << "\n";
+    std::cout << "Nature: " << nature << " (" << type << ")\n";
+    std::cout << "Item: " << itemName << "\n";
+    std::cout << "Quantity: " << quantity << "\n";
+    std::cout << "Rate: " << rate << "\n";
+    std::cout << "Amount: " << amount << "\n";
+    std::cout << "Description: " << description << "\n";
+    std::cout << "Debit: " << debit << "\n";
+    std::cout << "Credit: " << credit << "\n";
+    std::cout << "Date: " << date << "\n";
 }
 
-//Saves all details to the file
+// Saves transaction to file
 void Transaction::saveToFile(const std::string& filename) const {
-//file kholne ani save garne ani amount save garda type == "credit" ? credit : -debit garne
-/*std::ofstream infile(filename, std::ios::app);
-     if (!infile) {
-        std::cerr << "error opening file for writing\n";
-        return;
-     }
-      double amount = (type == "credit") ? credit : -debit;
-     infile<<"Account no\t\tTypes\t\tdescription\t\tdebit\t\tcredit\t\t amount \t\t date\n";
-     infile<<account<<"\t\t"<<type<<"\t\t"<<description<<"\t\t"<<debit<<"\t\t"<<credit<<"\t\t"<<amount<<"\t\t"<<date;
-   
-
-    infile<<"\n---------------------------------\n";
-    infile.close(); */
-    
-    //opens file in append mode and binds with a ofstream object
     std::ofstream outfile(filename, std::ios::app);
-
-    //Checks if there is error in opening the file
     if (!outfile) {
-        std::cerr << "error opening file: " << filename << "\n";
+        std::cerr << "Error opening file: " << filename << "\n";
         return;
     }
 
-   //Saving details in file
     outfile << account << ","
-            << type << ","
+            << nature << ","
+            << itemName << ","
+            << quantity << ","
+            << rate << ","
+            << amount << ","
             << description << ","
             << debit << ","
             << credit << ","
             << date.getDay() << "/" << date.getMonth() << "/" << date.getYear()
             << "\n";
 
-    //file closed
     outfile.close();
-
-    return;
 }
-

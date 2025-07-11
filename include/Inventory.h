@@ -22,6 +22,7 @@ public:
     void updatePrice(const std:: string nam, const int& p);
     void updateQuantity(const std::string nam, const int& q);
     void viewInventory() const;
+    double getPriceByName(const std::string& itemName) const;
     void saveInventoryToFile(const std::string& filename) const;
     void loadInventoryFromFile();
     void checkReorderAlerts();
