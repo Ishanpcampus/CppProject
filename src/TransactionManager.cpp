@@ -45,7 +45,7 @@ void TransactionManager::loadFromFile(const std::string& filename) {
         ds >> day >> slash1 >> month >> slash2 >> year;
 
         Date date(year, month, day);
-        
+
         // Create Transaction object with correct parameter order
         Transaction t(acc, natstr, itmstr, desc, rat, am, quant, date);
         transactions.push_back(t);
@@ -65,7 +65,6 @@ double TransactionManager::calculateBalance(const std::string &account) const {
     return balance;
 }
 std::vector<Transaction> TransactionManager::getAllTransactions() const {
-    for (const auto &t : transactions) {
         return transactions;
     }
-}
+

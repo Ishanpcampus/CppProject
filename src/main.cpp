@@ -9,7 +9,7 @@ int main() {
     TransactionManager transactionManager;
     Ledger ledger;
 
-    transactionManager.loadFromFile("data/transaction.txt");
+    transactionManager.loadFromFile("transaction.txt");
 
     bool running = true;
     while (running) {
