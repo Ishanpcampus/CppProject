@@ -8,8 +8,33 @@ Transaction::Transaction()
       rate(0.0), amount(0.0), quantity(0),
       debit(0.0), credit(0.0), date() {}
 
-Transaction::Transaction(int acc, const std::string& nat, const std::string& desc, int qty, double r, const Date& d)
-    : account(acc), nature(nat), description(desc), quantity(qty), rate(r), date(d) {
+
+/*nsaction::Transaction(int acc, const std::string& nat, const std::string& desc, int qty, double r, const Date& d)
+    : account(acc), nature(nat), description(desc), quantity(qty), rate(r), date(d)*/
+    Transaction::Transaction(int acc,
+                         const std::string& nat,
+                         const std::string& item,
+                         const std::string& desc,
+                         double rate,
+                         double amount,
+                         int qty,
+                         const std::string& type,
+                         double debit,
+                         double credit,
+                         const Date& date)
+                          :account(acc),
+      nature(nat),
+      itemName(item),
+      description(desc),
+      rate(rate),
+      amount(amount),
+      quantity(qty),
+      type(type),
+      debit(debit),
+      credit(credit),
+      date(date)
+{}
+ {
     amount = quantity * rate;
     if (nature == "sales" || nature == "purchase return") {
         type = "debit";
@@ -20,6 +45,7 @@ Transaction::Transaction(int acc, const std::string& nat, const std::string& des
         credit = amount;
         debit = 0.0;
     }
+
 }
 
 // Input function now depends on Inventory
@@ -54,7 +80,7 @@ void Transaction::input(Inventory& inventory) {
 
     amount = quantity * rate;
 
-    if (nature == "sales" || nature == "purchase return") {
+    if(nature == "sales" || nature == "purchase return") {
         type = "debit";
         debit = amount;
         credit = 0.0;
