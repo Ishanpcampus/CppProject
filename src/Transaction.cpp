@@ -8,8 +8,8 @@ Transaction::Transaction()
       rate(0.0), amount(0.0), quantity(0),
       debit(0.0), credit(0.0), date() {}
 
-Transaction::Transaction(int acc, const std::string& nat, const std::string& desc, int qty, double r, const Date& d)
-    : account(acc), nature(nat), description(desc), quantity(qty), rate(r), date(d) {
+Transaction::Transaction(int acc, const std::string& nat,const std::string& item, const std::string& desc, int qty, double r, const Date& d)
+    : account(acc), nature(nat),itemName(item), description(desc), quantity(qty), rate(r), date(d) {
     amount = quantity * rate;
     if (nature == "sales" || nature == "purchase return") {
         type = "debit";

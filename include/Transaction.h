@@ -20,7 +20,7 @@ public:
     Date date;
 
     Transaction();
-    Transaction(int acc, const std::string& nat, const std::string& desc, int qty, double r, const Date& d);
+    Transaction(int acc, const std::string& nat,const std::string& item,  const std::string& desc, int qty, double r, const Date& d);
 
 
     void input(Inventory& inventory); // Accept inventory reference
