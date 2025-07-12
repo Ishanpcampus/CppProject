@@ -30,9 +30,7 @@ Transaction(int acc,
             double rate,
             double amount,
             int    qty,
-            const std::string& type,
-            double debit,
-            double credit,
+            
             const Date& d);
 
 

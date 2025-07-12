@@ -18,9 +18,7 @@ Transaction::Transaction()
                          double rate,
                          double amount,
                          int qty,
-                         const std::string& type,
-                         double debit,
-                         double credit,
+                         
                          const Date& date)
                           :account(acc),
       nature(nat),
@@ -29,13 +27,11 @@ Transaction::Transaction()
       rate(rate),
       amount(amount),
       quantity(qty),
-      type(type),
-      debit(debit),
-      credit(credit),
+     
       date(date)
-{}
+
  {
-    amount = quantity * rate;
+    this->amount = quantity * rate;
     if (nature == "sales" || nature == "purchase return") {
         type = "debit";
         debit = amount;
@@ -106,8 +102,7 @@ void Transaction::display() const {
     std::cout << "Rate: " << rate << "\n";
     std::cout << "Amount: " << amount << "\n";
     std::cout << "Description: " << description << "\n";
-    std::cout << "Debit: " << debit << "\n";
-    std::cout << "Credit: " << credit << "\n";
+    
     std::cout << "Date: " << date << "\n";
 }
 
@@ -126,8 +121,7 @@ void Transaction::saveToFile(const std::string& filename) const {
             << rate << ","
             << amount << ","
             << description << ","
-            << debit << ","
-            << credit << ","
+            
             << date.getDay() << "/" << date.getMonth() << "/" << date.getYear()
             << "\n";
 

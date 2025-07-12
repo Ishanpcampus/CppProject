@@ -26,17 +26,17 @@ void TransactionManager::loadFromFile(const std::string& filename) {
         std::getline(ss, ratstr, ',');
         std::getline(ss, amoutstr, ',');
         std::getline(ss, desc, ',');
-        std::getline(ss, debitStr, ',');
-        std::getline(ss, creditStr, ',');
-        std::getline(ss, typeStr, ',');
+       //std::getline(ss, debitStr, ',');
+       // std::getline(ss, creditStr, ',');
+        //std::getline(ss, typeStr, ',');
         std::getline(ss, dateStr, ',');
 
         int acc = std::stoi(accStr);
         int quant = std::stoi(qun);
         double rat = std::stod(ratstr);
         double am = std::stod(amoutstr);
-        double debit = std::stod(debitStr);
-        double credit = std::stod(creditStr);
+        //double debit = std::stod(debitStr);
+       // double credit = std::stod(creditStr);
 
         // Parse date
         int day, month, year;
@@ -47,7 +47,7 @@ void TransactionManager::loadFromFile(const std::string& filename) {
         Date date(year, month, day);
         
         // Create Transaction object with correct parameter order
-        Transaction t(acc, natstr, itmstr, desc, rat, am, quant, typeStr, debit, credit, date);
+        Transaction t(acc, natstr, itmstr, desc, rat, am, quant, date);
         transactions.push_back(t);
     }
 
