@@ -7,6 +7,22 @@
 
 class Transaction {
 public:
+
+
+    Transaction();
+    //Transaction(int acc, const std::string& nat, const std::string& desc, int qty, double r, const Date& d);
+  Transaction(int acc,
+                const std::string& nat,
+                const std::string& item,
+                const std::string& desc,
+                double rate,
+                double amount,
+                int quantity,
+                const std::string& type,
+                double debit,
+                double credit,
+                const Date& date);
+
     int account;
     std::string type;
     std::string nature;
@@ -18,10 +34,6 @@ public:
     double debit;
     double credit;
     Date date;
-
-    Transaction();
-    Transaction(int acc, const std::string& nat, const std::string& desc, int qty, double r, const Date& d);
-
 
     void input(Inventory& inventory); // Accept inventory reference
     void display() const;
