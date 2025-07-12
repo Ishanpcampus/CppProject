@@ -9,8 +9,6 @@ Transaction::Transaction()
       debit(0.0), credit(0.0), date() {}
 
 
-/*nsaction::Transaction(int acc, const std::string& nat, const std::string& desc, int qty, double r, const Date& d)
-    : account(acc), nature(nat), description(desc), quantity(qty), rate(r), date(d)*/
     Transaction::Transaction(int acc,
                          const std::string& nat,
                          const std::string& item,
@@ -19,7 +17,7 @@ Transaction::Transaction()
                          double amount,
                          int qty,
                          
-                         const Date& date)
+                         const Date& date1)
                           :account(acc),
       nature(nat),
       itemName(item),
@@ -28,7 +26,7 @@ Transaction::Transaction()
       amount(amount),
       quantity(qty),
      
-      date(date)
+      date(date1)
 
  {
     this->amount = quantity * rate;

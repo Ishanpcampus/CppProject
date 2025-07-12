@@ -21,7 +21,24 @@ void LedgerEntry::displayStyled() const {
                                    std::to_string(date.getDay()))
               << "\n";
 }
+void Ledger::displayStyledLedger(int account) const {
+    std::cout << "\n═══════════════════════════════════════════════════════════════════\n";
+    std::cout << "                     Ledger for Account No: " << account << "\n";
+    std::cout << "═══════════════════════════════════════════════════════════════════\n";
+    std::cout << std::left << std::setw(30) << "Particulars"
+              << std::setw(6) << "J.F."
+              << std::setw(12) << "Amount"
+              << std::setw(12) << "Date" << "\n";
+    std::cout << "───────────────────────────────────────────────────────────────────\n";
 
+    for (const auto& e : entries) {
+        if (e.account == account) {
+            e.displayStyled();
+        }
+    }
+
+    std::cout << "───────────────────────────────────────────────────────────────────\n";
+}
 void Ledger::addEntry(const LedgerEntry& entry) {}
 void Ledger::loadFromTransactions(const std::vector<Transaction>& txList){
         entries.clear(); // Optional: Reset ledger before loading

@@ -81,7 +81,7 @@ void Inventory::viewInventory() const
 }
 
 //Writes all items present in the vector to the file
-void Inventory::saveInventoryToFile(const std::string &filename) const
+/*void Inventory::saveInventoryToFile("data/inventory.txt") const
 {
     std::ofstream outfile("inventory.txt", std::ios::app);
 
@@ -99,7 +99,7 @@ void Inventory::saveInventoryToFile(const std::string &filename) const
 //Reads all items from the inventory and assigns them to the vector
 void Inventory::loadInventoryFromFile()
 {
-    std::ifstream infile("inventory.txt");
+    std::ifstream infile("data/inventory.txt");
 
     while(!EOF){
         Item I;
@@ -123,3 +123,4 @@ void Inventory::checkReorderAlerts()
 
     return;
 }
+*/

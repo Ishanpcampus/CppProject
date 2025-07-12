@@ -64,3 +64,8 @@ double TransactionManager::calculateBalance(const std::string &account) const {
     }
     return balance;
 }
+std::vector<Transaction> TransactionManager::getAllTransactions() const {
+    for (const auto &t : transactions) {
+        return transactions;
+    }
+}

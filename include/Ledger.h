@@ -35,7 +35,7 @@ private:
 public:
     void loadFromTransactions(const std::vector<Transaction>& txList);
     void addEntry(const LedgerEntry& entry);
-    void displayStyledLedger(int account) const;;
+    void displayStyledLedger(int account) const;
 };
 
 #endif
