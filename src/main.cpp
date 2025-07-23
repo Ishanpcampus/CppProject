@@ -3,6 +3,7 @@
 #include "Transaction.h"
 #include "TransactionManager.h"
 #include "Ledger.h"
+#include "Report.h"
 
 int main() {
     Inventory inventory;
@@ -10,7 +11,7 @@ int main() {
     Ledger ledger;
 
     transactionManager.loadFromFile("transaction.txt");
-
+    Report report(transactionManager, inventory);
     bool running = true;
     while (running) {
         int choice;
@@ -23,6 +24,11 @@ int main() {
         std::cout << "5. View Ledger for Account\n";
         std::cout << "6. Exit\n";
         std::cout << "Enter your choice: ";
+        std::cout << "7. Generate Profit & Loss Report\n";
+        std::cout << "8. Generate Balance Sheet\n";
+        std::cout << "9. Generate Inventory Summary\n";
+        std::cout << "10. Export Report\n";
+
         std::cin >> choice;
 
         switch (choice) {
@@ -61,6 +67,26 @@ int main() {
                 std::cout << "🔚 Exiting AccountingApp... Bye, Ishan!\n";
                 break;
             }
+            case 7: {
+                report.generateProfitLoss();
+                break;
+            }
+            case 8: {
+                report.generateBalanceSheet();
+                break;
+            }
+            case 9: {
+                report.generateInventorySummary();
+                break;
+            }
+            case 10: {
+                std::string fileName;
+                std::cout << "Enter filename to export report (e.g., report.txt): ";
+                std::cin >> fileName;
+                report.exportReport(fileName);
+                break;
+            }
+
             default:
                 std::cout << "❌ Invalid choice! Please try again.\n";
         }

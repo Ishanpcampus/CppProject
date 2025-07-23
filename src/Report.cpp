@@ -69,4 +69,18 @@ void Report::exportReport(const std::string &reportName) {
     outFile.close();
     std::cout << "✅ Report exported to: " << reportName << "\n";
 }
+void Report::generateInventorySummary() {
+    double totalValue = 0.0;
+    int totalItems = 0;
 
+    for (const auto& item : inventory.getItems()) {
+        totalItems += item.quantity;
+        totalValue += item.quantity * item.price;
+    }
+
+    std::cout << "\n📦 Inventory Summary 📦\n";
+    std::cout << "----------------------------------\n";
+    std::cout << "Total Unique Items: " << inventory.getItems().size() << "\n";
+    std::cout << "Total Quantity:     " << totalItems << "\n";
+    std::cout << "Total Value:        Rs. " << totalValue << "\n\n";
+}
