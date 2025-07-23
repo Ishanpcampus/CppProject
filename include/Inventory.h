@@ -26,6 +26,7 @@ public:
     void saveInventoryToFile(const std::string& filename) const;
     void loadInventoryFromFile();
     void checkReorderAlerts();
+    const std::vector<Item>& getItems() const;
 };
 
 #endif

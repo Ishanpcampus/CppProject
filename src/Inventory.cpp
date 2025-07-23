@@ -79,6 +79,11 @@ void Inventory::viewInventory() const
 
     return;
 }
+//function to return inventory for balance sheet
+const std::vector<Item> &Inventory::getItems() const {
+    return items;
+}
+
 
 //Writes all items present in the vector to the file
 /*void Inventory::saveInventoryToFile("data/inventory.txt") const
