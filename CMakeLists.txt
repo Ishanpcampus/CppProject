@@ -16,6 +16,7 @@ add_executable(AccountingApp ${SOURCES}
         include/Date.h
         src/Date.cpp
         include/TransactionManager.h
-        src/TransactionManager.cpp)
+        src/TransactionManager.cpp
+        include/Utilis.h)
 
 
